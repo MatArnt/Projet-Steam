@@ -45,11 +45,57 @@ def scroll_page(driver, scrolls=5, pause_time=2):
 print("Scrolling de la page...")
 scroll_page(driver, scrolls=5, pause_time=2)
 
+bouton_afficherplus = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//button[contains(., 'Afficher plus')]")))
+bouton_afficherplus.click()
+
+scroll_page(driver, scrolls=5, pause_time=2)
+
 # on veut le titre le prix original e prix réduit la réduction et l'évaluation.
 
-titre = driver.find_element(By.XPATH, "//div[contains(@class, 'ImpressionTrackedElement')]//img").get_attribute("alt")
-print(titre)
+# 1. On récupère TOUTES les boîtes de jeux (les parents)
+# On utilise find_elements (avec un 's') pour avoir une liste
+# On cible d'abord le conteneur PRINCIPAL (sale_item_browser)
+# Puis on cherche les jeux (ImpressionTrackedElement) à l'intérieur
+liste_jeux = driver.find_elements(By.XPATH, "//div[contains(@class, 'sale_item_browser')]//div[contains(@class, 'ImpressionTrackedElement')]")
+
+print(f"Nombre de jeux trouvés (filtrés) : {len(liste_jeux)}")
+
+# 2. On boucle sur chaque "boîte" une par une
+for jeu in liste_jeux:
+    print("------------------------------------------------")
+    try:
+        # --- TITRE ---
+        # ⚠️ ATTENTION AU POINT "." AU DÉBUT DU XPATH !
+        # Le "." signifie "Cherche à l'intérieur de 'jeu', pas dans toute la page"
+        titre = jeu.find_element(By.XPATH, ".//img").get_attribute("alt")
+    except:
+        titre = "Titre inconnu"
+
+    try:
+        # --- PRIX ---
+        # On cherche la div de prix À L'INTÉRIEUR de la variable 'jeu'
+        infos_prix = jeu.find_element(By.XPATH, ".//div[contains(@class, 'StoreSalePriceWidgetContainer')]").get_attribute("aria-label")
+    except:
+        infos_prix = "Pas de prix / Gratuit"
+
+    try:
+        # --- ÉVALUATION ---
+        # Idem, on cherche l'avis À L'INTÉRIEUR de 'jeu'
+        infos_eval = jeu.find_element(By.XPATH, ".//a[contains(@class, 'ReviewScore')]//div[@aria-label]").get_attribute("aria-label")
+    except:
+        infos_eval = "Pas d'évaluation"
+
+    try:
+        # --- RÉSUMÉ ---
+        # On cherche la div dont la classe contient 'StoreSaleWidgetShortDesc'
+        resume = jeu.find_element(By.XPATH, ".//div[contains(@class, 'StoreSaleWidgetShortDesc')]").text
+    except:
+        resume = "Pas de résumé disponible"
+
+    # Affichage des résultats liés
+    print(f"Jeu : {titre}")
+    print(f"Prix : {infos_prix}")
+    print(f"Avis : {infos_eval}")
+    print(f"Résumé : {resume}")
 
 
-infos_prix = driver.find_element(By.XPATH, "//div[contains(@class, 'StoreSalePriceWidgetContainer')]").get_attribute("aria-label")
-print(infos_prix)
