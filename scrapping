@@ -3,13 +3,32 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options 
 from webdriver_manager.chrome import ChromeDriverManager
 import time
 import csv
 
+# --- CONFIGURATION DU DRIVER ---
+options = webdriver.ChromeOptions()
 
-# Initialize driver
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+# 1. Mode Headless (Le script tourne en fond sans fenêtre)
+# On utilise "=new" car c'est la version moderne qui imite parfaitement un vrai navigateur
+options.add_argument("--headless=new") 
+
+# 2. Taille de fenêtre (OBLIGATOIRE en headless)
+# Sans ça, Steam peut ne pas charger les éléments car il pense que la fenêtre est minuscule
+options.add_argument("--window-size=1920,1080")
+
+# 3. User-Agent (Pour ne pas se faire repérer)
+user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+options.add_argument(f'user-agent={user_agent}')
+
+# 4. Anti-détection bot
+options.add_argument("--disable-blink-features=AutomationControlled")
+
+# 5. On lance le driver avec toutes ces options
+print("Lancement du scraper en arrière-plan (Headless)...")
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
 driver.get("https://store.steampowered.com")
 
