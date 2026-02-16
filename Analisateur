@@ -1,0 +1,68 @@
+import pandas as pd
+import tkinter as tk
+from tkinter import ttk, messagebox
+
+def analyser_csv(jeux_steam):
+    # 1. Chargement et nettoyage
+    try:
+        df = pd.read_csv(jeux_steam)
+        
+        # Extraction du pourcentage (ex: "30 %" -> 30)
+        df['Reduc_Val'] = df['Infos Prix'].str.extract(r'(\d+)\s*%').astype(float)
+        
+        # Extraction du prix après le "à" (ex: "à 27,99€" -> 27.99)
+        # On remplace la virgule par un point pour le calcul
+        df['Prix_Net'] = df['Infos Prix'].str.extract(r'à\s*([\d,]+)').replace(',', '.', regex=True).astype(float)
+        
+        return df
+    except Exception as e:
+        print(f"Erreur lors de la lecture : {e}")
+        return None
+
+def filtrer_donnees(df, reduc, avis, prix_max):
+    # Logique de filtrage
+    mask = (df['Reduc_Val'] >= float(reduc.replace('%',''))) & \
+           (df['Avis'].str.contains(avis, na=False)) & \
+           (df['Prix_Net'] <= float(prix_max))
+    
+    resultat = df[mask]
+    
+    if resultat.empty:
+        messagebox.showinfo("Résultat", "Aucun jeu ne correspond à ces critères.")
+    else:
+        # Affiche les titres trouvés dans la console ou une popup
+        titres = "\n".join(resultat['Titre'].tolist())
+        messagebox.showinfo("Jeux trouvés", f"Voici les jeux correspondants :\n\n{titres}")
+
+# --- Interface Graphique ---
+df_jeux = analyser_csv('jeux_steam.csv')
+
+if df_jeux is not None:
+    root = tk.Tk()
+    root.title("Filtre de Jeux Steam")
+    root.geometry("300x350")
+
+    # Liste des réductions
+    tk.Label(root, text="Réduction minimum :").pack(pady=5)
+    combo_reduc = ttk.Combobox(root, values=["10%", "30%", "50%", "70%"])
+    combo_reduc.current(0)
+    combo_reduc.pack()
+
+    # Liste des avis
+    tk.Label(root, text="Qualité des avis :").pack(pady=5)
+    combo_avis = ttk.Combobox(root, values=["extrêmement positives", "très positives", "moyennes"])
+    combo_avis.current(1)
+    combo_avis.pack()
+
+    # Tranches de prix
+    tk.Label(root, text="Prix maximum :").pack(pady=5)
+    combo_prix = ttk.Combobox(root, values=["10", "20", "30", "60"])
+    combo_prix.current(2)
+    combo_prix.pack()
+
+    # Bouton de validation
+    btn = tk.Button(root, text="Rechercher", 
+                    command=lambda: filtrer_donnees(df_jeux, combo_reduc.get(), combo_avis.get(), combo_prix.get()))
+    btn.pack(pady=20)
+
+    root.mainloop()
