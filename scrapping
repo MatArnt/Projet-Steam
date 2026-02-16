@@ -117,7 +117,7 @@ with open('jeux_steam.csv', 'w', newline='', encoding='utf-8') as f:
             resume = jeu.find_element(By.XPATH, ".//div[contains(@class, 'StoreSaleWidgetShortDesc')]").text
         except:
             resume = "Pas de résumé disponible"
-
+        
         try:
             # --- TAGS ---
             elements_tags = jeu.find_elements(By.XPATH, ".//a[contains(@href, '/tags/')]")
