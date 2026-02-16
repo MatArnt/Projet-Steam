@@ -84,7 +84,7 @@ print(f"Nombre de jeux trouvés (filtrés) : {len(liste_jeux)}")
 with open('jeux_steam.csv', 'w', newline='', encoding='utf-8') as f:
     writer = csv.writer(f)
 
-    writer.writerow(["Titre", "Infos Prix", "Avis", "Résumé", "Tags"])   
+    writer.writerow(["Titre", "Infos Prix", "Avis", "Résumé", "Tags", "Lien"])   
     
     # 2. On boucle sur chaque "boîte" une par une
     for jeu in liste_jeux:
@@ -128,7 +128,7 @@ with open('jeux_steam.csv', 'w', newline='', encoding='utf-8') as f:
             # 3. On filtre (if tag) pour virer les vides s'il y en a encore
             
             liste_tags_propre = [t.get_attribute("textContent").strip() for t in elements_tags]
-            liste_tags_propre = [tag for tag in liste_tags_propre if tag] # Double sécurité
+            liste_tags_propre = [tag for tag in liste_tags_propre if tag] # garde l'élément seulement s'il contient quelque chose
             
             # On extrait le texte de chaque balise trouvée
             # Et on les rejoint avec une virgule (ex: "RPG, Aventure, Action")
@@ -139,6 +139,18 @@ with open('jeux_steam.csv', 'w', newline='', encoding='utf-8') as f:
                 
         except:
             tags = "Erreur récupération tags"
+        
+        try:
+            # --- LIEN DU JEU ---
+            # On cherche la balise <a> qui contient "/app/" dans son lien
+            lien = jeu.find_element(By.XPATH, ".//a[contains(@href, '/app/')]").get_attribute("href")
+            
+            # (Optionnel) Nettoyage : On enlève les paramètres de tracking "?snr=..." si tu veux un lien propre
+            if "?" in lien:
+                lien = lien.split("?")[0]
+                
+        except:
+            lien = "Pas de lien trouvé"
 
         # Affichage des résultats liés
         print(f"Jeu : {titre}")
@@ -146,7 +158,7 @@ with open('jeux_steam.csv', 'w', newline='', encoding='utf-8') as f:
         print(f"Avis : {infos_eval}")
         print(f"Résumé : {resume}")
         print(f"Tags : {tags}")
-        writer.writerow([titre, infos_prix, infos_eval, resume, tags])
+        writer.writerow([titre, infos_prix, infos_eval, resume, tags, lien])
         print(f"Sauvegardé : {titre}")
 
 print("--- FIN DU SCRAPING ---")
