@@ -188,9 +188,17 @@ class SteamHunterApp:
             messagebox.showwarning("Attention", "Veuillez vérifier vos filtres.")
 
 # Lancement du programme
+def lancer_interface():
+    """Fonction pour démarrer l'interface graphique depuis un autre fichier"""
+    try:
+        root = tk.Tk()
+        # On suppose que le CSV est à la racine du projet
+        app = SteamHunterApp(root, "jeux_steam.csv")
+        root.mainloop()
+    except Exception as e:
+        messagebox.showerror("Erreur de lancement", f"Impossible de lancer l'analyseur : {e}")
+
+# Permet de tester le fichier seul si besoin
 if __name__ == "__main__":
-    root = tk.Tk()
-    app = SteamHunterApp(root, "jeux_steam.csv")
-    
-    root.mainloop()
+    lancer_interface()
 
