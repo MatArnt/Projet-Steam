@@ -4,7 +4,7 @@ import sys
 from src.scraper import SteamPromoScraper
 
 # On essaie d'importer l'analyseur. 
-# Si ça échoue (ex: module manquant), on évite de faire planter tout le script tout de suite.
+# Si ça échoue, on évite de faire planter tout le script tout de suite.
 try:
     from src.analyzer import lancer_interface
 except ImportError as e:
@@ -16,7 +16,7 @@ def main():
     print("🎮 STEAM HUNTER - OUTIL COMPLET")
     print("========================================")
 
-    # --- PARTIE 1 : LE SCRAPING ---
+    # Partie 1 : Scrapping
     choix = input("Voulez-vous lancer le scraping (récupération des promos) ? (o/n) : ").lower()
     
     if choix == 'o' or choix == 'y':
@@ -35,7 +35,7 @@ def main():
     # Pause pour être sûr que le fichier est bien libéré
     time.sleep(1)
 
-    # --- PARTIE 2 : L'ANALYSE (INTERFACE GRAPHIQUE) ---
+    # Partie 2 : Analyser 
     print("\n📊 Lancement de l'Interface d'Analyse...")
     
     if not os.path.exists("jeux_steam.csv"):
