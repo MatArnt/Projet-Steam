@@ -3,7 +3,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 import webbrowser
 
-# --- LA PARTIE DONNÉES (LE CERVEAU) ---
+# Partie sur les données
 class SteamDataManager:
     """Cette classe sert à charger, nettoyer et filtrer la liste des jeux."""
     
@@ -55,7 +55,7 @@ class SteamDataManager:
         return self.df[mask]
 
 
-# --- LA FENÊTRE DES RÉSULTATS (LA LISTE) ---
+# Fenêtre des résultats
 class ResultsWindow(tk.Toplevel):
     """Crée une deuxième fenêtre pour afficher les jeux trouvés."""
     
@@ -109,7 +109,7 @@ class ResultsWindow(tk.Toplevel):
         self.canvas.yview_scroll(int(-1*(event.delta/120)), "units")
 
 
-# --- LA FENÊTRE PRINCIPALE (L'APPLI) ---
+# Application
 class SteamHunterApp:
     """Fenêtre principale où l'on choisit ses critères de recherche."""
     def __init__(self, root, file_path):
