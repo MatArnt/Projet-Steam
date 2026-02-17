@@ -194,14 +194,3 @@ if __name__ == "__main__":
     
     root.mainloop()
 
-    # --- CRÉATION DU FICHIER REQUIREMENTS (DÉPENDANCES) ---
-    print("Génération du fichier de dépendances...")
-    try:
-        import subprocess
-        with open("requirements.txt", "w", encoding="utf-8") as f:
-            # Sauvegarde la liste des bibliothèques installées pour pouvoir les réinstaller ailleurs
-            subprocess.run(["pip", "freeze"], stdout=f, check=True)
-        print("Fichier 'requirements.txt' généré avec succès.")
-    except Exception as e:
-        print(f"Erreur lors de la génération du fichier : {e}")
-
