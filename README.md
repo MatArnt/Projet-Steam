@@ -14,8 +14,8 @@
 Il permet de récupérer automatiquement (Scraping) les offres de la section "Promotions" de Steam, puis d'analyser ces données via une interface graphique interactive pour trouver les pépites cachées (ex: jeux à -50% avec des avis "Très positifs").
 
 ### ✨ Fonctionnalités Clés
-* **🕵️‍♂️ Scraping Furtif :** Utilise un navigateur "Headless" (invisible) avec protection anti-bot et User-Agent réaliste.
-* **🔄 Scroll Infini Automatisé :** Le script gère le chargement dynamique et le bouton "Afficher plus" tout seul.
+* **🕵️‍♂️ Scraping Furtif :** Utilise un navigateur "Headless" et User-Agent réaliste.
+* **🔄 Scroll Infini Automatisé :** Le script gère le chargement dynamique tout seul.
 * **📊 Analyse Intelligente :** Une interface graphique (GUI) pour filtrer par :
     * Budget max (€)
     * Pourcentage de réduction (%)
@@ -57,7 +57,7 @@ python main.py
 Le terminal vous demandera :
 - Voulez-vous lancer le scraping (récupération des promos) ? (o/n)
 - Tapez o (oui) pour lancer le robot.
-- Attendez que le terminal affiche ✅ Scraping terminé !.
+- Attendez que le terminal affiche ✅ Scraping terminé !
 - Note : Chrome ne s'ouvrira pas visiblement, tout se passe en arrière-plan.
 
 ### Étape 3 : L'Analyse (Interface)
