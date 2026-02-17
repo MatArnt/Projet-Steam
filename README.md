@@ -56,11 +56,11 @@ python main.py
 ### Étape 2 : Le Scraping (Récupération)
 Le terminal vous demandera :
 
-# Voulez-vous lancer le scraping (récupération des promos) ? (o/n)
+Voulez-vous lancer le scraping (récupération des promos) ? (o/n)
 
-# Tapez o (oui) pour lancer le robot.
+Tapez o (oui) pour lancer le robot.
 
-# Attendez que le terminal affiche ✅ Scraping terminé !.
+Attendez que le terminal affiche ✅ Scraping terminé !.
 
 Note : Chrome ne s'ouvrira pas visiblement, tout se passe en arrière-plan.
 
