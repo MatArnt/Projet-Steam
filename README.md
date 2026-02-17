@@ -60,6 +60,8 @@ Le terminal vous demandera :
 - Attendez que le terminal affiche ✅ Scraping terminé !
 - Note : Chrome ne s'ouvrira pas visiblement, tout se passe en arrière-plan.
 
+Ps : Dans le fichier python scrapper.py vous pouvez modifier la boucle pour charger plus de jeux dans le CSV.
+
 ### Étape 3 : L'Analyse (Interface)
 - Une fois le scraping fini (ou si vous avez répondu 'n'), la fenêtre Steam Hunter s'ouvre.
 - Choisissez vos critères (ex: Prix max 20€, Avis "très positives").
