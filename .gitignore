@@ -1,0 +1,16 @@
+# Ignore les dossiers de cache Python
+__pycache__/
+*.pyc
+
+# Ignore ton environnement virtuel (si tu en as un)
+env/
+venv/
+.env
+
+# Ignore les données générées (Optionnel : si tu veux que le CSV reste local)
+data/*.csv
+*.csv
+
+# Ignore les fichiers systèmes Mac/Windows
+.DS_Store
+Thumbs.db
