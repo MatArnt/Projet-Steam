@@ -37,24 +37,18 @@ accept_button = WebDriverWait(driver, 10).until(
 )
 accept_button.click()
 
-time.sleep(2)
-
 bouton_parcourir = WebDriverWait(driver, 10).until(
         EC.element_to_be_clickable((By.XPATH, "//button[contains(., 'Parcourir')]"))
     )
 bouton_parcourir.click()
-
-time.sleep(2)
 
 bouton_promo = WebDriverWait(driver, 10).until(
     EC.element_to_be_clickable((By.XPATH, "//a[contains(@href, 'specials')]"))
 )
 bouton_promo.click()
 
-time.sleep(5)
-
 # Fonction pour scroller la page
-def scroll_page(driver, scrolls=5, pause_time=2):
+def scroll_page(driver, scrolls=3, pause_time=1):
     """Scroll la page pour charger plus de jeux"""
     for i in range(scrolls):
         # Scroll vers le bas
@@ -62,14 +56,36 @@ def scroll_page(driver, scrolls=5, pause_time=2):
         print(f"Scroll {i+1}/{scrolls}")
         time.sleep(pause_time)
 
-# Scroller la page pour charger plus de jeux
-print("Scrolling de la page...")
-scroll_page(driver, scrolls=5, pause_time=2)
+# --- CONFIGURATION DU CHARGEMENT ---
+nombre_de_tours = 3  # <--- Change ce chiffre pour cliquer plus ou moins de fois
 
-bouton_afficherplus = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//button[contains(., 'Afficher plus')]")))
-bouton_afficherplus.click()
+print(f"Début du chargement étendu : {nombre_de_tours} tours prévus.")
 
-scroll_page(driver, scrolls=5, pause_time=2)
+for i in range(nombre_de_tours):
+    print(f"--- Tour {i+1} / {nombre_de_tours} ---")
+    
+    # 1. On scrolle vers le bas pour atteindre le bouton
+    scroll_page(driver, scrolls=3, pause_time=1)
+    
+    try:
+        # 2. On essaie de trouver et cliquer sur le bouton
+        bouton_afficherplus = WebDriverWait(driver, 5).until(
+            EC.element_to_be_clickable((By.XPATH, "//button[contains(., 'Afficher plus')]"))
+        )
+        bouton_afficherplus.click()
+        print("✅ Bouton 'Afficher plus' cliqué !")
+        
+        # 3. Pause importante pour laisser le temps aux nouveaux jeux d'arriver
+        time.sleep(3)
+        
+    except:
+        # Si le bouton n'est pas trouvé (ex: fin de la liste), on arrête proprement
+        print("⚠️ Bouton non trouvé ou fin de page atteinte. Arrêt de la boucle.")
+        break
+
+# Un dernier scroll final pour être sûr de bien charger toutes les images des derniers jeux
+print("Scroll final...")
+scroll_page(driver, scrolls=3, pause_time=1)
 
 # on veut le titre le prix original e prix réduit la réduction et l'évaluation.
 
