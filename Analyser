@@ -127,13 +127,13 @@ class SteamHunterApp:
 
         # Configuration des menus déroulants
         self.reduc_var = self._create_label_and_cb(main_container, "Réduction minimum :", 
-                                                   [f"{i}%" for i in range(0, 100, 10)], "10%")
+                                                   [f"{i}%" for i in range(0, 100, 5)], "10%")
         
         self.avis_var = self._create_label_and_cb(main_container, "Avis des joueurs :", 
                                                   ["positives", "moyennes", "négatives"], "positives")
         
         self.prix_var = self._create_label_and_cb(main_container, "Budget max (€) :", 
-                                                  [f"{i}" for i in range(0, 100, 5)], "35")
+                                                  [f"{i}" for i in range(0, 105, 5)], "35")
 
         # Section Tags
         ttk.Separator(main_container, orient='horizontal').pack(fill='x', pady=20)
@@ -178,6 +178,16 @@ class SteamHunterApp:
 
 if __name__ == "__main__":
     root = tk.Tk()
-    # Assurez-vous que le fichier csv est dans le même dossier
     app = SteamHunterApp(root, "jeux_steam.csv")
+    
     root.mainloop()
+
+    # --- GÉNÉRATION AUTOMATIQUE DU REQUIREMENTS.TXT ---
+    print("Génération du fichier de dépendances...")
+    try:
+        import subprocess
+        with open("requirements.txt", "w", encoding="utf-8") as f:
+            subprocess.run(["pip", "freeze"], stdout=f, check=True)
+        print("Fichier 'requirements.txt' généré avec succès.")
+    except Exception as e:
+        print(f"Erreur lors de la génération du fichier : {e}")
