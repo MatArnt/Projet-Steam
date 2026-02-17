@@ -43,28 +43,28 @@ Ouvrez un terminal dans le dossier du projet et lancez la commande suivante :
 ```bash
 python -m pip install -r requirements.txt
 ```
-##🚀 Utilisation
+## 🚀 Utilisation
 Le projet utilise un lanceur unique pour simplifier la tâche.
 
-Étape 1 : Lancer le programme
+### Étape 1 : Lancer le programme
 Dans votre terminal, tapez :
 
 ```Bash
 python main.py
 ```
 
-Étape 2 : Le Scraping (Récupération)
+### Étape 2 : Le Scraping (Récupération)
 Le terminal vous demandera :
 
-Voulez-vous lancer le scraping (récupération des promos) ? (o/n)
+# Voulez-vous lancer le scraping (récupération des promos) ? (o/n)
 
-Tapez o (oui) pour lancer le robot.
+# Tapez o (oui) pour lancer le robot.
 
-Attendez que le terminal affiche ✅ Scraping terminé !.
+# Attendez que le terminal affiche ✅ Scraping terminé !.
 
 Note : Chrome ne s'ouvrira pas visiblement, tout se passe en arrière-plan.
 
-Étape 3 : L'Analyse (Interface)
+### Étape 3 : L'Analyse (Interface)
 Une fois le scraping fini (ou si vous avez répondu 'n'), la fenêtre Steam Hunter s'ouvre.
 
 Choisissez vos critères (ex: Prix max 20€, Avis "très positives").
