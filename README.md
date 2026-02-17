@@ -69,7 +69,7 @@ Le terminal vous demandera :
 ## 📂 Structure du Projet
 Voici comment les fichiers sont organisés :
 
-Plaintext
+```bash
 Projet-Steam/
 │
 ├── main.py              # 🏁 Le chef d'orchestre (lance le scraping puis l'interface)
@@ -79,6 +79,7 @@ Projet-Steam/
 └── src/                 # ⚙️ Code source (Le moteur)
     ├── scraper.py       # 🤖 Le robot Selenium (classe SteamPromoScraper)
     └── analyzer.py      # 🖥️ L'interface graphique Tkinter (classe SteamHunterApp)
+```
 
 ## ⚖️ Disclaimer
 Ce projet a été réalisé dans un but pédagogique pour apprendre l'automatisation avec Python, Selenium et Tkinter.
