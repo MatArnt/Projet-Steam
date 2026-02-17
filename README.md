@@ -55,16 +55,16 @@ python main.py
 
 ### Étape 2 : Le Scraping (Récupération)
 Le terminal vous demandera :
-# Voulez-vous lancer le scraping (récupération des promos) ? (o/n)
-# Tapez o (oui) pour lancer le robot.
-# Attendez que le terminal affiche ✅ Scraping terminé !.
-# Note : Chrome ne s'ouvrira pas visiblement, tout se passe en arrière-plan.
+# ## Voulez-vous lancer le scraping (récupération des promos) ? (o/n)
+# ## Tapez o (oui) pour lancer le robot.
+# ## Attendez que le terminal affiche ✅ Scraping terminé !.
+# ## Note : Chrome ne s'ouvrira pas visiblement, tout se passe en arrière-plan.
 
 ### Étape 3 : L'Analyse (Interface)
-# Une fois le scraping fini (ou si vous avez répondu 'n'), la fenêtre Steam Hunter s'ouvre.
-# Choisissez vos critères (ex: Prix max 20€, Avis "très positives").
-# Cliquez sur "CHASSER LES OFFRES".
-# Une liste de résultats apparaît. Cliquez sur le titre d'un jeu pour l'acheter !
+# ## Une fois le scraping fini (ou si vous avez répondu 'n'), la fenêtre Steam Hunter s'ouvre.
+# ## Choisissez vos critères (ex: Prix max 20€, Avis "très positives").
+# ## Cliquez sur "CHASSER LES OFFRES".
+# ## Une liste de résultats apparaît. Cliquez sur le titre d'un jeu pour l'acheter !
 
 ## 📂 Structure du Projet
 Voici comment les fichiers sont organisés :
