@@ -2,12 +2,12 @@
 __pycache__/
 *.pyc
 
-# Ignore ton environnement virtuel (si tu en as un)
+# Ignore ton environnement virtuel 
 env/
 venv/
 .env
 
-# Ignore les données générées (Optionnel : si tu veux que le CSV reste local)
+# Ignore les données générées 
 data/*.csv
 *.csv
 
